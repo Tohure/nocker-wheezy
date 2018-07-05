@@ -35,12 +35,12 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
   && rm "node-v$NODE_VERSION-linux-$ARCH.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt \
   && ln -s /usr/local/bin/node /usr/local/bin/nodejs
 
+CMD [ "node" ]
+
+#Set Firebase tools
+RUN npm -g install firebase-tools
+
 #Set work Folder
 ENV MAIN_FOLDER=/usr/local/tohure/
 VOLUME $MAIN_FOLDER
 WORKDIR $MAIN_FOLDER
-
-# For run a container and start a Bash session use 'bash' or /bin/bash
-# i.e. docker run -it --rm jansanchez/nocker-wheezy bash
-
-CMD [ "node" ]
