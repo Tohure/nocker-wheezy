@@ -22,5 +22,13 @@ git clone git@github.com:jansanchez/nocker-wheezy.git
 
 ## Build
 ```
-docker build -t jansanchez/nocker-wheezy .
+docker build -t apollker .
 ```
+
+## Volume
+```
+docker run --rm -ti -v $(pwd)/:/usr/local/tohure apollker bash
+```
+
+## Generate schema
+apollo schema:download --endpoint=http://localhost:8080/graphql schema.json

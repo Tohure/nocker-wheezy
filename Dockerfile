@@ -37,32 +37,12 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
 
 ENV YARN_VERSION 1.7.0
 
-RUN set -ex \
-  && for key in \
-    6A010C5166006599AA17F08146C2130DFD2497F5 \
-  ; do \
-    gpg --keyserver pgp.mit.edu --recv-keys "$key" || \
-    gpg --keyserver keyserver.pgp.com --recv-keys "$key" || \
-    gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key" ; \
-  done \
-  && curl -fSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz" \
-  && curl -fSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz.asc" \
-  && gpg --batch --verify yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz \
-  && mkdir -p /opt/yarn \
-  && tar -xzf yarn-v$YARN_VERSION.tar.gz -C /opt/yarn --strip-components=1 \
-  && ln -s /opt/yarn/bin/yarn /usr/local/bin/yarn \
-  && ln -s /opt/yarn/bin/yarn /usr/local/bin/yarnpkg \
-  && rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz
-
-# Paths
-ENV YARN_PATH /tmp/cache/yarn/
-
-# Yarn Configuration
-RUN mkdir -p $YARN_PATH \
-    && chmod -R 775 $YARN_PATH \
-    && yarn config set cache-folder $YARN_PATH
-
-# For run a container and start a Bash session use 'bash' or /bin/bash
-# i.e. docker run -it --rm jansanchez/nocker-wheezy bash
-
 CMD [ "node" ]
+
+#Install Apollo Gen
+RUN npm install -g apollo
+
+#Set work Folder
+ENV MAIN_FOLDER=/usr/local/tohure/
+VOLUME $MAIN_FOLDER
+WORKDIR $MAIN_FOLDER
