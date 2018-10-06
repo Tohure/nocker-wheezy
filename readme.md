@@ -27,5 +27,7 @@ docker build -t jansanchez/nocker-wheezy .
 
 ## Volume
 ```
-docker run --rm -ti -v $(pwd)/:/usr/local/tohure nocker bash
+docker run --rm -ti -v $(pwd)/:/usr/local/tohure nocker bash (Mac & Linux)
+
+docker run --rm -ti -v ${PWD}/:/usr/local/tohure nocker bash (Windows - PowerShell)
 ```
