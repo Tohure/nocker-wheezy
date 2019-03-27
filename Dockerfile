@@ -1,6 +1,6 @@
 # Main Image
 FROM buildpack-deps:wheezy
-LABEL maintainer="Jan Sanchez <joejansanchez@gmail.com>"
+LABEL maintainer="Tohure <cr.htorres@gmail.com>"
 
 # gpg keys listed at https://github.com/nodejs/node#release-team
 RUN set -ex \
